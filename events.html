@@ -624,80 +624,38 @@
                 <ul>
           <li>
                  <iframe width="100%" height="400px" src="https://www.youtube.com/embed/z2lgwOjCNxw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
                     </li>
                     <li>
-                        <p>
             <iframe width="100%" height="400px" src="https://www.youtube.com/embed/NqjHHgf_S0U" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
                     </li>
                     <li>
-                        <p>
                         <iframe width="100%" height="400px" src="https://www.youtube.com/embed/ZAYa7cVhhB0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
                     </li>
           <li>
-                        <p>
                         <iframe width="100%" height="400px" src="https://www.youtube.com/embed/Tmq9h5vu2S8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
                     </li>
                     <li>
-                        <p>
                         <iframe width="100%" height="400px" src="https://www.youtube.com/embed/u4addYw1oY4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
                     </li>
                     <li>
                         <p>
                         <p>
                         <iframe width="100%" height="400px" src="https://www.youtube.com/embed/IFJT3cZ_qiQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
                     </li>
                     <li>
-                        <p>
-                                      <p>
                         <iframe width="100%" height="400px" src="https://www.youtube.com/embed/n_ExVwOTUt0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
                     </li>
                     <li>
-                        <p>
-                                      <p>
                         <iframe width="100%" height="400px" src="https://www.youtube.com/embed/vLKvWEUaJQk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
                     </li>
                     <li>
-                        <p>
-                                      <p>
                         <iframe width="100%" height="400px" src="https://www.youtube.com/embed/3yoDjVW5O7Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
                     </li>
                     <li>
-                        <p>
-                                          <p>
                         <iframe width="100%" height="400px" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
                     </li>
                     <li>
-                       <p>
-                                          <p>
                         <iframe width="100%" height="400px" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
-                    </li>
-                    <li> <p>
-                                          <p>
-                        <iframe width="100%" height="400px" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </p>
-                    </li>
-                    <li>
-                      <p>
-                                          <p>
-                        <iframe width="100%" height="400px" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                       </p>
-                   </li>
-                    <li>
-                      <p>
-                                          <p>
-                        <iframe width="100%" height="400px" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                     </p>
                    </li>
                     <li>
                         <p>
@@ -714,6 +672,11 @@
                         </p>
                     </li>
                 </ul>
+                <!-- Navigation Buttons (Add Here) -->
+    <button class="prev">❮</button>
+    <button class="next">❯</button>
+
+    <!-- Arrows for Manual Navigation -->
                     <div class="arrows">
                         <label for="slides_1"></label>
                         <label for="slides_2"></label>
@@ -747,9 +710,8 @@
             </div>
         </div>
       <script>
-      document.addEventListener("DOMContentLoaded", function () {
+   document.addEventListener("DOMContentLoaded", function () {
     let slideIndex = 0;
-    const slides = document.querySelectorAll(".csslider ul li");
     const radios = document.querySelectorAll(".csslider input[name='slides']");
     const totalSlides = radios.length;
 
@@ -759,36 +721,47 @@
         } else if (index < 0) {
             index = totalSlides - 1; // Go to the last slide
         }
-        radios[index].checked = true;
+
+        if (!radios[index].checked) {
+            radios[index].checked = true;
+        }
+
         slideIndex = index;
     }
 
-    // Arrow Navigation
-    document.querySelector(".prev").addEventListener("click", function () {
-        showSlide(slideIndex - 1);
-    });
+    // Add event listeners for Previous and Next buttons
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
 
-    document.querySelector(".next").addEventListener("click", function () {
-        showSlide(slideIndex + 1);
-    });
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener("click", function () {
+            showSlide(slideIndex - 1);
+        });
 
-    // Swipe/Touch Support
+        nextBtn.addEventListener("click", function () {
+            showSlide(slideIndex + 1);
+        });
+    }
+
+    // Swipe/Touch Support for Mobile
     let startX = 0;
     let endX = 0;
     const sliderContainer = document.querySelector(".csslider ul");
 
-    sliderContainer.addEventListener("touchstart", function (e) {
-        startX = e.touches[0].clientX;
-    });
+    if (sliderContainer) {
+        sliderContainer.addEventListener("touchstart", function (e) {
+            startX = e.touches[0].clientX;
+        });
 
-    sliderContainer.addEventListener("touchend", function (e) {
-        endX = e.changedTouches[0].clientX;
-        if (startX - endX > 50) {
-            showSlide(slideIndex + 1); // Swipe left → Next
-        } else if (endX - startX > 50) {
-            showSlide(slideIndex - 1); // Swipe right → Previous
-        }
-    });
+        sliderContainer.addEventListener("touchend", function (e) {
+            endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) {
+                showSlide(slideIndex + 1); // Swipe left → Next
+            } else if (endX - startX > 50) {
+                showSlide(slideIndex - 1); // Swipe right → Previous
+            }
+        });
+    }
 });
         </script>
 

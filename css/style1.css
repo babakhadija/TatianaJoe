@@ -47,7 +47,7 @@ body {
 	  .csslider > ul {
 		  position: relative;
 		  width: 820px;
-		  height: 420px;
+		  height: auto;
 		  z-index: 1;
 		  font-size: 0;
 		  line-height: 0;
@@ -273,3 +273,35 @@ body {
 	  p {
 		  margin-left:3em;
 	  }
+	  	  /* Make the slider responsive */
+@media (max-width: 768px) {
+    .csslider > ul {
+        width: 100%; /* Full width */
+        height: auto; /* Adjust height automatically */
+        border: none; /* Remove border on small screens */
+    }
+
+    .csslider > ul > li {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Ensure videos fit within the screen */
+    video {
+        width: 100%; /* Full width */
+        height: auto; /* Maintain aspect ratio */
+        max-width: 100%; /* Prevent overflow */
+    }
+
+    /* Adjust navigation dots */
+    .csslider > .navigation {
+        bottom: 5px; /* Move navigation closer */
+    }
+
+    /* Adjust arrows for better visibility */
+    .csslider > .arrows {
+        left: 0;
+        width: 100%;
+        padding: 0;
+    }
+}
